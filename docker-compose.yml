@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  app:
+    # Dersom du ønsker å deploye docker containeren med versjonen som
+    # er publisert på GitHub Container Registry, kan du bruke følgende linje:
+    build: .
+    # og erstatte med følgende linje: (husk å erstatte <username> og <repo>
+    # med ditt brukernavn og repo-navn, du finner denne informasjonen på
+    # `Packages`-fanen på repoet ditt på GitHub)
+    #image: ghcr.io/<username>/<repo>:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - WEB_CONCURRENCY=4  # Hvor mange prosesser som skal kjøre samtidig (anbefalt: 2x antall kjerner, hvis tom: 1)
+      - TZ=Europe/Oslo     # Tidsone for serveren (Settes til Norge som standard)
+    restart: unless-stopped
